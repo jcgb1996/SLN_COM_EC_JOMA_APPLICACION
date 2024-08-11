@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\COM.EC.JOMA.EMP.APLICACION\COM.EC.JOMA.EMP.APLICACION.csproj" />
+    <ProjectReference Include="..\COM.EC.JOMA.EMP.CROSSCUTTING\COM.EC.JOMA.EMP.CROSSCUTTING.csproj" />
+    <ProjectReference Include="..\COM.EC.JOMA.EMP.DOMAIN\COM.EC.JOMA.EMP.DOMAIN.csproj" />
+    <ProjectReference Include="..\COM.EC.JOMA.EMP.QUERY\COM.EC.JOMA.EMP.QUERY.csproj" />
+  </ItemGroup>
+
+</Project>

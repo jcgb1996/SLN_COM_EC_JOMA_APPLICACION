@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Inicio\Data\" />
+    <Folder Include="Areas\Inicio\Models\" />
+    <Folder Include="Areas\Inicio\Views\Login\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\COM.EC.JOMA.EMP.APLICACION.SERVICE\COM.EC.JOMA.EMP.APLICACION.SERVICE.csproj" />
+    <ProjectReference Include="..\COM.EC.JOMA.EMP.CROSSCUTTING.SERVICE\COM.EC.JOMA.EMP.CROSSCUTTING.SERVICE.csproj" />
+    <ProjectReference Include="..\COM.EC.JOMA.EMP.CROSSCUTTING\COM.EC.JOMA.EMP.CROSSCUTTING.csproj" />
+    <ProjectReference Include="..\COM.EC.JOMA.EMP.DOMAIN\COM.EC.JOMA.EMP.DOMAIN.csproj" />
+    <ProjectReference Include="..\COM.EC.JOMA.EMP.QUERY.SERVICE\COM.EC.JOMA.EMP.QUERY.SERVICE.csproj" />
+  </ItemGroup>
+
+</Project>
