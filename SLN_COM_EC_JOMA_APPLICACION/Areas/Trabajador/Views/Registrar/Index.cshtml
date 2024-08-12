@@ -1,0 +1,123 @@
+﻿@using COM.EC.JOMA.EMP.APLICACION.SERVICE.Constants
+@{
+    var Controller = $"{WebSiteConstans.JOMA_WEBSITE_AREA_TRABAJADOR}/{WebSiteConstans.JOMA_WEBSITE_AREA_INICIO_CONTROLLER_LOGIN}";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-12 col-md-12 d-flex flex-column align-items-center justify-content-center">
+
+        <div class="card mb-3">
+
+            <div class="card-body">
+
+                <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Crea un trabajador</h5>
+                    <p class="text-center small">Ingrese los datos personales</p>
+                </div>
+
+                <div class="alert alert-warning alert-dismissible fade show mb-2 pb-2 pt-2 pe-2 ps-2" id="ContenteForzarCambiosDeClave" role="alert">
+                    Notificar que al correo registrado le llegara un email con el usuario y clave temporal para que pueda reestablecer la contraseña.
+                </div>
+
+                <form class="row g-3 needs-validation" id="RegistrarTrabajador" novalidate>
+                    <div class="col-4">
+                        <div class="form-floating">
+                            <input type="text" name="floatingNombres" class="form-control" id="floatingNombres" placeholder="Nombres" required>
+                            <label for="floatingNombres">Nombres</label>
+                            <div class="invalid-feedback">Please, enter your name!</div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-floating">
+                            <input type="text" name="name" class="form-control" id="floatingApellido" placeholder="Apellidos" required>
+                            <label for="floatingApellido">Apellidos</label>
+                            <div class="invalid-feedback">Please, enter your name!</div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-floating">
+                            <input type="text" name="name" class="form-control" id="floatingCedula" placeholder="cédula" required>
+                            <label for="floatingCedula">Cédula</label>
+                            <div class="invalid-feedback">Please, enter your name!</div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-4">
+                        <div class="form-floating">
+                            <input type="email" name="email" class="form-control" id="floatingCorreo" placeholder="correo" required>
+                            <label for="floatingCorreo">Correo</label>
+                            <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-floating">
+                            <select id="inputState" class="form-select" id="floatingGenero" placeholder="Genero" required>
+                                <option></option>
+                                <option value="1">Masculino</option>
+                                <option value="2">Femenino</option>
+                                <option value="3">Otros</option>
+                            </select>
+                            <label for="floatingGenero">Genero</label>
+                            <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" placeholder="Fecha nacimiento" id="floatingFechaNacimiento" required>
+                            <label for="floatingFechaNacimiento">Fecha Nacimiento</label>
+                            <div class="invalid-feedback">Please, enter your name!</div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-floating">
+                            <input type="number" name="floatinTelefonoContacto" class="form-control" id="floatinTelefonoContacto" placeholder="Telefono contacto" required>
+                            <label for="floatinTelefonoContacto">Telefono de contacto</label>
+                            <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-floating">
+                            <input type="number" name="floatinTelefonoContactoEmergencia" class="form-control" id="floatinTelefonoContactoEmergencia" placeholder="Contanto de emergencia" required>
+                            <label for="floatinTelefonoContactoEmergencia">Contanto de emergencia</label>
+                            <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Address" id="floatingDireccion" style="height: 100px;" required></textarea>
+                            <label for="floatingDireccion">Dirección</label>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-2 pe-0 justify-content-end">
+                        <div class="col-2">
+                            <button class="btn btn-secondary w-100" onclick="Site.limpiarFormularioById('RegistrarTrabajador');" type="button">Cancelar</button>
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-primary w-100" onclick="Trabajador.GuardarDatos();" type="button">Guardar</button>
+                        </div>
+                    </div>
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/trabajador/tabajador.js"></script>
+
+<script>
+    URL_BASE_TRABAJADOR = '@Url.Content("~/")';
+    CONTROLERNAME_TRABAJADOR = "@Controller";
+
+</script>

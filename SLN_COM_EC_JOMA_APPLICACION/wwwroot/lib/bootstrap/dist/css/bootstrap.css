@@ -7552,6 +7552,10 @@ textarea.form-control-lg {
   font-size: 1rem !important;
 }
 
+.fs-13 {
+    font-size: 13px !important;
+}
+
 .fst-italic {
   font-style: italic !important;
 }

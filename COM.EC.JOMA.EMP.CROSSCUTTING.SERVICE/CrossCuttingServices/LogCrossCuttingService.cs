@@ -74,14 +74,19 @@ namespace COM.EC.JOMA.EMP.CROSSCUTTING.SERVICE.CrossCuttingServices
 
             try
             {
-                // Escribir todos los mensajes de log acumulados en el archivo
+                string? logDirectory = Path.GetDirectoryName(logFilePath);
+
+                if (!string.IsNullOrEmpty(logDirectory) && !Directory.Exists(logDirectory))
+                {
+                    Directory.CreateDirectory(logDirectory);
+                }
+
                 File.AppendAllLines(logFilePath, _logMessages);
-                _logMessages.Clear(); // Limpia la memoria después de escribir
+                _logMessages.Clear(); 
             }
             catch (Exception ex)
             {
-                // Si ocurre un error al escribir los logs, manejar el error
-                Console.WriteLine($"Error al guardar los logs: {ex.Message}");
+                throw;
             }
         }
 

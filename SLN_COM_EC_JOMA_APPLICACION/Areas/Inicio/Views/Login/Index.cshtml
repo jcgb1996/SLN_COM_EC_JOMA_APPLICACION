@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using COM.EC.JOMA.EMP.APLICACION.SERVICE.Constants
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -25,7 +26,7 @@
     <link href="~/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
     <link href="~/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="~/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
+    <link href="~/lib/bootstrap/dist/css/jquery.jgrowl.min.css" rel="stylesheet" />
     <!-- Template Main CSS File -->
     <link href="~/assets/css/style.css" rel="stylesheet">
 
@@ -34,6 +35,73 @@
 <body>
 
     <main>
+        <div id="notificationContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1050;"></div>
+
+        <div id="loading-spinner" class="d-none justify-content-center align-items-center position-fixed top-0 start-0 w-100 h-100 bg-light bg-opacity-75" style="z-index: 1050;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content">
+                    <div class="modal-header pt-2 pb-2">
+                        <h5 class="modal-title card-title text-center p-0 fs-4" id="TitleOlvidasteContrasenia">¿Olvidaste tu contraseña?</h5>
+                        <h5 class="modal-title card-title text-center p-0 fs-4" id="ForzarCambioContrasenia">Forzar cambio de clave</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-body">
+
+                            <div class="alert alert-primary alert-dismissible fade show mb-2 pt-2 pe-2 ps-2" id="ContenteReestablecerContrasenia" role="alert">
+                             Ingresa tu usuario y Ruc compania y te enviaremos instrucciones para restablecer tu contraseña
+                              </div>
+
+
+                            <div class="alert alert-warning alert-dismissible fade show mb-2 pt-2 pe-2 ps-2 d-none" id="ContenteForzarCambiosDeClave" role="alert">
+                                 Estimado cliente su contraseña ha expirado por favor realice el cambio de contraseña
+                             </div>
+
+                            <form class="row g-3 needs-validation" id="FrmRecuperacion" novalidate>
+                                <div class="col-12">
+                                    <label for="txtUserRecuperacion" class="form-label">Usuario</label>
+                                    <div class="input-group has-validation">
+                                        <span class="input-group-text" id="inputGroupPrepend">
+                                            <i class="bi bi-person"></i>
+                                        </span>
+                                        <input type="text" name="txtUserRecuperacion" placeholder="Usuario" minlength="3" class="form-control" id="txtUserRecuperacion" required>
+                                        <div class="invalid-feedback">
+                                            Por favor, introduzca su nombre de usuario.
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-12">
+                                    <label for="txtCompaniaRecuperacion" class="form-label">Compania</label>
+                                    <div class="input-group has-validation">
+                                        <span class="input-group-text" id="txtCompaniaRecuperacion">
+                                            <i class="bi bi-building"></i>
+                                        </span>
+                                        <input type="text" name="txtCompania" minlength="3" placeholder="Ruc" class="form-control" id="txtCompaniaRecuperacion" required>
+                                        <div class="invalid-feedback">
+                                            ¡Por favor, introduzca el ruc de la compania!
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                           
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" onclick="Login.RecuperarContrasenia();" class="btn btn-primary">Recuperar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container">
 
             <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -57,13 +125,15 @@
                                         <p class="text-center small">Introduzca su nombre de usuario y contraseña para iniciar sesión</p>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate>
+                                    <form class="row g-3 needs-validation" id="FrmLogin" novalidate>
 
                                         <div class="col-12">
-                                            <label for="yourUsername" class="form-label">Usuario</label>
+                                            <label for="txtUser" class="form-label">Usuario</label>
                                             <div class="input-group has-validation">
-                                                <span class="input-group-text" id="inputGroupPrepend"></span>
-                                                <input type="text" name="username" class="form-control" id="yourUsername" required>
+                                                <span class="input-group-text" id="inputGroupPrepend">
+                                                    <i class="bi bi-person"></i>
+                                                </span>
+                                                <input type="text" name="txtUser" minlength="3" placeholder="Usuario" class="form-control" id="txtUser" required>
                                                 <div class="invalid-feedback">
                                                     Por favor, introduzca su nombre de usuario.
                                                 </div>
@@ -71,24 +141,50 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="yourPassword" class="form-label">Contraseña</label>
-                                            <input type="password" name="password" class="form-control" id="yourPassword" required>
-                                            <div class="invalid-feedback">
-                                                ¡Por favor, introduzca su contraseña!
+                                            <label for="txtPassword" class="form-label">Contraseña</label>
+                                            <div class="input-group has-validation">
+                                                <span class="input-group-text" id="inputGroupPassword">
+                                                    <i class="bi bi-lock"></i>
+                                                </span>
+                                                <input type="password" name="txtPassword" minlength="3" placeholder="****" class="form-control" id="txtPassword" required>
+                                                <div class="invalid-feedback">
+                                                    ¡Por favor, introduzca su contraseña!
+                                                </div>
                                             </div>
+
+
                                         </div>
 
+
                                         <div class="col-12">
+                                            <label for="txtCompania" class="form-label">Compania</label>
+                                            <div class="input-group has-validation">
+                                                <span class="input-group-text" id="inputGroupCompania">
+                                                    <i class="bi bi-building"></i>
+                                                </span>
+                                                <input type="text" name="txtCompania" minlength="3" placeholder="Ruc" class="form-control" id="txtCompania" required>
+                                                <div class="invalid-feedback">
+                                                    ¡Por favor, introduzca el ruc de la compania!
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="col-6">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
                                                 <label class="form-check-label" for="rememberMe">Recordar</label>
                                             </div>
                                         </div>
-                                        <div class="col-12">
-                                            <button class="btn btn-primary w-100" type="submit">Inicio Sesión</button>
+                                        <div class="col-6 text-end">
+                                            <a href="#" onclick="Login.OpenModalRecuperarContrasenia();">
+                                                <span>Recuperar contraseña</span>
+                                            </a>
                                         </div>
+
                                         <div class="col-12">
-                                            <p class="small mb-0">¿No tienes una cuenta? <a href="pages-register.html">Create una cuenta</a></p>
+                                            <button class="btn btn-primary w-100" type="button" onclick="Login.RealizarLogin();">Inicio Sesión</button>
                                         </div>
                                     </form>
 
@@ -96,7 +192,7 @@
                             </div>
 
                             <div class="credits">
-                                Diseñado y creado por <a href="#">Jose Gonzalez </a>
+                                Diseñado y creado por <a href="#">JOMA V_@AppConstants.Version</a>
                             </div>
 
                         </div>
@@ -119,10 +215,23 @@
     <script src="~/assets/vendor/simple-datatables/simple-datatables.js"></script>
     <script src="~/assets/vendor/tinymce/tinymce.min.js"></script>
     <script src="~/assets/vendor/php-email-form/validate.js"></script>
-
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery/jquery.jgrowl.min.js"></script>
     <!-- Template Main JS File -->
     <script src="~/assets/js/main.js"></script>
+    <script src="~/js/site.js"></script>
+    <script src="~/js/inicio/login.js"></script>
+
+    <script>
+        URL_BASE = '@Url.Content("~/")';
+        CONTROLERNAME = "@ViewBag.ControlerName";
+        Login.Init();
+
+    </script>
 
 </body>
+
+
 
 </html>

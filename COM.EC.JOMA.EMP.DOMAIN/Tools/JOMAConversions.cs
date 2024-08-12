@@ -520,7 +520,7 @@ namespace COM.EC.JOMA.EMP.DOMAIN.Tools
             if (excepcion.Contains("ERUSER:"))
             {
                 excepcion = excepcion.Replace("ERUSER:", null);
-                return new GSUserException(excepcion);
+                return new JOMAUException(excepcion);
             }
 
             excepcion = excepcion.Replace("EREDOC:", null);

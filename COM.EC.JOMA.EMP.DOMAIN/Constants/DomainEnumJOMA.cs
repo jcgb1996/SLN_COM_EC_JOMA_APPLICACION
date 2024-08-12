@@ -10,7 +10,7 @@ namespace COM.EC.JOMA.EMP.DOMAIN.Constants
 {
     public enum JOMAComponente
     {
-        [JomaDetComponenteAttribute("CP001", "ECJOMAEMP_PortalWeb")]
+        [JomaDetComponenteAttribute("CP001", "JOMAEMP_PortalWeb")]
         JomaPortalWeb
     }
 
@@ -28,5 +28,11 @@ namespace COM.EC.JOMA.EMP.DOMAIN.Constants
         Calidad = 2,
         [Description("dev")]
         Desarrollo = 3
+    }
+
+    public enum SitiosWebJUMA
+    {
+        Administrador = 1,
+        Trabajador = 2,
     }
 }

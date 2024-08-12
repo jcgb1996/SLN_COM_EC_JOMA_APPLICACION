@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace COM.EC.JOMA.EMP.DOMAIN.Tools
 {
-    public sealed class GSUserException : Exception
+    public sealed class JOMAUException : Exception
     {
-        public GSUserException(string message)
+        public JOMAUException(string message)
             : base(message)
         {
         }

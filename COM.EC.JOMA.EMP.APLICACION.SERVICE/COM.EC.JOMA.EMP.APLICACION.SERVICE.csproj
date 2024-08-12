@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\COM.EC.JOMA.EMP.APLICACION\COM.EC.JOMA.EMP.APLICACION.csproj" />
     <ProjectReference Include="..\COM.EC.JOMA.EMP.CROSSCUTTING\COM.EC.JOMA.EMP.CROSSCUTTING.csproj" />
     <ProjectReference Include="..\COM.EC.JOMA.EMP.DOMAIN\COM.EC.JOMA.EMP.DOMAIN.csproj" />

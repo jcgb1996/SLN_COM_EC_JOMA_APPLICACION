@@ -9,6 +9,7 @@ namespace COM.EC.JOMA.EMP.APLICACION.Interfaces
 {
     public interface IInicioAppServices
     {
-        bool LoginCompania(LoginReqAppDto login);
+        Task<LoginAppResultDto> LoginCompania(LoginReqAppDto login);
+        Task<List<MenuAppDto>> GetOpcionesMenuPorIdUsuario(long IdUsuario, byte SitioWeb);
     }
 }
